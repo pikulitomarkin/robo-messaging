@@ -5,7 +5,9 @@ import { handleWebhookVerification, handleWebhookEvent } from './lib/whatsapp.js
 dotenv.config();
 
 const app = express();
+// Twilio posts urlencoded forms; support both JSON and urlencoded
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 app.get('/webhook', handleWebhookVerification);
 app.post('/webhook', handleWebhookEvent);
